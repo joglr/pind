@@ -40,11 +40,12 @@ export const projectRouter = createTRPCRouter({
         where: {
           id: input.projectId,
         },
+        include: {
+          owner: true,
+        },
       });
     }),
-  getAllProjects: publicProcedure
-
-  .query(({ ctx }) => {
+  getAllProjects: publicProcedure.query(({ ctx }) => {
     if (!ctx.session?.user) {
       return [];
     }
@@ -52,9 +53,6 @@ export const projectRouter = createTRPCRouter({
       orderBy: {
         updatedAt: "desc",
       },
-      select: {
-        ownerId: true,
-      }
     });
   }),
 

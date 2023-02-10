@@ -1,20 +1,18 @@
 import type { NextPage } from "next";
 import { useRouter } from "next/router";
 import { api } from "../utils/api";
+import { ProjectView } from "../components/ViewProject";
 
 const ProjectPage: NextPage = () => {
-  const router = useRouter()
+  const router = useRouter();
   const projectId = router.query.projectId as string;
-  const project = api.project.getProject.useQuery({ projectId  });
+  const project = api.project.getProject.useQuery({ projectId });
 
-  return <div>
-    <h1>Projekt</h1>
-    <p>
-      Projekt ID: {projectId}
-      {project.isLoading ? "Loading..." : JSON.stringify(project.data)}
-    </p>
-  </div>
-}
+  return project.data ? (
+    <ProjectView project={project.data} />
+  ) : (
+    <span>Indlæser projekt...</span>
+  );
+};
 
-export default ProjectPage
-
+export default ProjectPage;
