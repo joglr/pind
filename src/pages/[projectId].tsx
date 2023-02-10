@@ -6,12 +6,14 @@ import { ProjectView } from "../components/ViewProject";
 const ProjectPage: NextPage = () => {
   const router = useRouter();
   const projectId = router.query.projectId as string;
-  const project = api.project.getProject.useQuery({ projectId });
+  const { data: project, refetch } = api.project.getProject.useQuery({
+    projectId,
+  });
 
-  return project.data ? (
-    <ProjectView project={project.data} />
+  return project ? (
+    <ProjectView project={project} refetch={() => void refetch()} />
   ) : (
-    <span>Indlæser projekt...</span>
+    <span className="text-white">Indlæser projekt...</span>
   );
 };
 

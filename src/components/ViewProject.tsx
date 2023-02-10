@@ -3,17 +3,17 @@ import { api } from "../utils/api";
 
 export const ProjectView = ({
   project,
-  refresh,
+  refetch: refresh,
 }: {
   project: Project;
-  refresh: () => void;
+  refetch: () => void;
 }) => {
   const incrementPindMutation = api.project.increasePindCount.useMutation();
   const decrementPindMutation = api.project.decreasePindCount.useMutation();
   const incrementOmgangMutation = api.project.increaseOmgangCount.useMutation();
   const decrementOmgangMutation = api.project.decreaseOmgangCount.useMutation();
 
-  async function performActionAndRefresh(action: Promise) {
+  async function performActionAndRefresh(action: Promise<unknown>) {
     await action;
     refresh();
   }
@@ -38,7 +38,9 @@ export const ProjectView = ({
               disabled ? "bg-purple-900" : "bg-purple-200/10"
             }`}
             onClick={() =>
-              void incrementPindMutation.mutateAsync({ id: project.id })
+              void performActionAndRefresh(
+                incrementPindMutation.mutateAsync({ id: project.id })
+              )
             }
             disabled={disabled}
           >
@@ -49,9 +51,11 @@ export const ProjectView = ({
               disabled ? "bg-purple-900" : "bg-purple-200/10"
             }`}
             onClick={() =>
-              void decrementPindMutation.mutateAsync({
-                projectId: project.id,
-              })
+              void performActionAndRefresh(
+                decrementPindMutation.mutateAsync({
+                  projectId: project.id,
+                })
+              )
             }
             disabled={disabled}
           >
@@ -66,9 +70,11 @@ export const ProjectView = ({
               disabled ? "bg-purple-900" : "bg-purple-200/10"
             }`}
             onClick={() =>
-              void incrementOmgangMutation.mutateAsync({
-                projectId: project.id,
-              })
+              void performActionAndRefresh(
+                incrementOmgangMutation.mutateAsync({
+                  projectId: project.id,
+                })
+              )
             }
             disabled={disabled}
           >
@@ -79,9 +85,11 @@ export const ProjectView = ({
               disabled ? "bg-purple-900" : "bg-purple-200/10"
             }`}
             onClick={() =>
-              void decrementOmgangMutation.mutateAsync({
-                projectId: project.id,
-              })
+              void performActionAndRefresh(
+                decrementOmgangMutation.mutateAsync({
+                  projectId: project.id,
+                })
+              )
             }
             disabled={disabled}
           >
