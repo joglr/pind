@@ -1,17 +1,18 @@
 import { type NextPage } from "next";
 import Head from "next/head";
-import Link from "next/link";
 import { useSession } from "next-auth/react";
 
 import { api } from "../utils/api";
 import ViewProjects from "../components/ViewProjects";
-import ProjectForm from "../components/ProjectForm";
 
 const Home: NextPage = () => {
   const session = useSession();
-  const { data: projects, refetch } = api.project.getAllProjects.useQuery(undefined, {
-    enabled: session.status === "authenticated",
-  });
+  const { data: projects, refetch } = api.project.getAllProjects.useQuery(
+    undefined,
+    {
+      enabled: session.status === "authenticated",
+    }
+  );
 
   return (
     <>
@@ -21,7 +22,7 @@ const Home: NextPage = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       {session.status === "authenticated" && projects ? (
-        <ViewProjects projects={projects} refetch={refetch} />
+        <ViewProjects projects={projects} refetch={() => void refetch()} />
       ) : null}
     </>
   );
