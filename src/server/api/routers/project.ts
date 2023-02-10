@@ -113,13 +113,13 @@ export const projectRouter = createTRPCRouter({
   decreasePindCount: protectedProcedure
     .input(
       z.object({
-        id: z.string(),
+        projectId: z.string(),
       })
     )
     .mutation(({ ctx, input }) => {
       return ctx.prisma.project.update({
         where: {
-          id: input.id,
+          id: input.projectId,
         },
         data: {
           pindCount: {
@@ -132,13 +132,13 @@ export const projectRouter = createTRPCRouter({
   increaseOmgangCount: protectedProcedure
     .input(
       z.object({
-        id: z.string(),
+        projectId: z.string(),
       })
     )
     .mutation(({ ctx, input }) => {
       return ctx.prisma.project.update({
         where: {
-          id: input.id,
+          id: input.projectId,
         },
         data: {
           omgangCount: {
@@ -151,13 +151,13 @@ export const projectRouter = createTRPCRouter({
   decreaseOmgangCount: protectedProcedure
     .input(
       z.object({
-        id: z.string(),
+        projectId: z.string(),
       })
     )
     .mutation(({ ctx, input }) => {
       return ctx.prisma.project.update({
         where: {
-          id: input.id,
+          id: input.projectId,
         },
         data: {
           omgangCount: {
