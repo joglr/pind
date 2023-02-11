@@ -62,14 +62,14 @@ export const authOptions: NextAuthOptions = {
       server: env.EMAIL_SERVER,
       from: env.EMAIL_FROM,
     }),
-    FacebookProvider({
-      clientId: env.FACEBOOK_CLIENT_ID,
-      clientSecret: env.FACEBOOK_CLIENT_SECRET,
-    }),
-    GoogleProvider({
-      clientId: env.GOOGLE_CLIENT_ID,
-      clientSecret: env.GOOGLE_CLIENT_SECRET,
-    }),
+    // FacebookProvider({
+    //   clientId: env.FACEBOOK_CLIENT_ID,
+    //   clientSecret: env.FACEBOOK_CLIENT_SECRET,
+    // }),
+    // GoogleProvider({
+    //   clientId: env.GOOGLE_CLIENT_ID,
+    //   clientSecret: env.GOOGLE_CLIENT_SECRET,
+    // }),
     // AppleProvider({
     //   clientId: env.APPLE_CLIENT_ID,
     //   clientSecret: env.APPLE_CLIENT_SECRET,
