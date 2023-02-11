@@ -10,13 +10,13 @@ export const Auth = () => {
       {router.route !== "/" ? (
         <Link
           href="/"
-          className="rounded-full bg-white/10 px-10 py-3 font-semibold text-white no-underline transition hover:bg-white/20"
+          className="rounded-full bg-white/10 px-10 py-3 font-semibold no-underline transition hover:bg-white/20"
         >
           Tilbage
         </Link>
       ) : null}
       <button
-        className="rounded-full bg-white/10 px-10 py-3 font-semibold text-white no-underline transition hover:bg-red-500/20"
+        className="rounded-full bg-white/10 px-10 py-3 font-semibold no-underline transition hover:bg-green-500/20"
         onClick={session.data ? () => void signOut() : () => void signIn()}
       >
         {session.data ? "Log ud" : "Log ind"}

@@ -25,8 +25,8 @@ export const ProjectView = ({
     decrementOmgangMutation.isLoading;
 
   return (
-    <div className="flex max-w-xs flex-col gap-4 rounded-xl bg-white/10 p-4 text-white">
-      {/* <h2 className="my-4 mx-1 text-4xl text-white">Projekter</h2> */}
+    <div className="flex max-w-xs flex-col gap-4 rounded-xl bg-white/10 p-4">
+      {/* <h2 className="my-4 mx-1 text-4xl">Projekter</h2> */}
 
       <h3 className="text-2xl font-bold">{project.name}</h3>
       <div className="grid grid-cols-2 gap-2">

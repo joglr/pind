@@ -2,8 +2,9 @@ import type { Project } from "@prisma/client";
 import { useSession } from "next-auth/react";
 import Link from "next/link";
 import { api } from "../utils/api";
+import ProjectsList from "./ProjectsList";
 
-const ProjectList = ({
+const ViewProjects = ({
   projects,
   refetch,
 }: {
@@ -27,57 +28,37 @@ const ProjectList = ({
 
   return (
     <div>
-      <h2 className="my-4 mx-1 text-4xl text-white">Mine projekter</h2>
-      <ul className="grid grid-cols-1 gap-4 sm:grid-cols-2">
-        {projects.map((project) => {
-          return (
-            <li key={project.id}>
-              <Link
-                className="flex max-w-xs flex-col gap-4 rounded-xl bg-white/10 p-4 text-white hover:bg-white/20"
-                href={`/${project.id}`}
-              >
-                <h3 className="text-2xl font-bold">{project.name} →</h3>
-                <div className="text-lg">{project.description}</div>
-                <div className="flex">
-                  <div className="m-1">
-                    <div>{project.pindCount}</div>
-                    <span>Pinde</span>
-                  </div>
-                  <div className="m-1">
-                    <div>{project.omgangCount}</div>
-                    <span>Omgange</span>
-                  </div>
-                </div>
-              </Link>
-            </li>
-          );
-        })}
-      </ul>
-      <h2 className="my-4 mx-1 text-4xl text-white">Tiføj projekt</h2>
+      <h2 className="my-4 mx-1 text-4xl">Mine projekter</h2>
+      {projects.length > 0 ? (
+        <ProjectsList projects={projects} />
+      ) : (
+        <span className="m-1">Du har ikke tilføjet nogen projekter endnu</span>
+      )}
+      <h2 className="my-4 mx-1 text-4xl">Tiføj projekt</h2>
       <ul>
         <li>
           <form
-            className="flex max-w-xs flex-col gap-4 rounded-xl bg-white/10 p-4 text-white"
+            className="flex max-w-xs flex-col gap-4 rounded-xl bg-white/10 p-4"
             onSubmit={(evt) => {
               evt.preventDefault();
               void createProject(evt);
             }}
           >
             <input
-              className="border-b border-dashed  bg-transparent text-2xl font-bold text-white"
+              className="border-b border-dashed  bg-transparent text-2xl font-bold"
               name="projectName"
               placeholder="Navn på projekt"
               disabled={createProjectMutation.isLoading}
             />
             <input
-              className="border-b border-dashed  bg-transparent text-lg text-white"
+              className="border-b border-dashed  bg-transparent text-lg"
               name="description"
               placeholder="Beskrivelse"
               disabled={createProjectMutation.isLoading}
             />
             <button
               disabled={createProjectMutation.isLoading}
-              className="rounded-full bg-white/10 px-10 py-3 font-semibold text-white no-underline transition hover:bg-green-500/20"
+              className="rounded-full bg-white/10 px-10 py-3 font-semibold no-underline transition hover:bg-green-500/20"
             >
               {createProjectMutation.isLoading
                 ? "Tilføj projekt..."
@@ -90,4 +71,4 @@ const ProjectList = ({
   );
 };
 
-export default ProjectList;
+export default ViewProjects;
