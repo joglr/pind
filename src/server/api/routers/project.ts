@@ -50,6 +50,9 @@ export const projectRouter = createTRPCRouter({
       return [];
     }
     return ctx.prisma.project.findMany({
+      where: {
+        ownerId: ctx.session.user.id,
+      },
       orderBy: {
         updatedAt: "desc",
       },
