@@ -1,5 +1,6 @@
 import type { Project } from "@prisma/client";
 import { api } from "../utils/api";
+import { PlusIcon, MinusIcon } from "./util";
 
 export const ProjectView = ({
   project,
@@ -34,8 +35,8 @@ export const ProjectView = ({
           <div>{project.pindCount}</div>
           <span>Pinde</span>
           <button
-            className={`mx-1 h-8 w-8 rounded  ${
-              disabled ? "bg-purple-900" : "bg-purple-200/10"
+            className={`mx-2 grid h-10 w-10 place-items-center rounded text-2xl font-bold  ${
+              disabled ? "bg-purple-900" : "bg-purple-200/10 hover:bg-white/20"
             }`}
             onClick={() =>
               void performActionAndRefresh(
@@ -44,11 +45,11 @@ export const ProjectView = ({
             }
             disabled={disabled}
           >
-            ➕
+            <PlusIcon />
           </button>
           <button
-            className={`mx-1 h-8 w-8 rounded  ${
-              disabled ? "bg-purple-900" : "bg-purple-200/10"
+            className={`mx-2 grid h-10 w-10 place-items-center rounded text-2xl font-bold ${
+              disabled ? "bg-purple-900" : "bg-purple-200/10 hover:bg-white/20"
             }`}
             onClick={() =>
               void performActionAndRefresh(
@@ -59,15 +60,15 @@ export const ProjectView = ({
             }
             disabled={disabled}
           >
-            ➖
+            <MinusIcon />
           </button>
         </div>
         <div className="grid grid-flow-col grid-cols-2 grid-rows-2 items-center gap-2">
           <div>{project.omgangCount}</div>
           <span>Omgange</span>
           <button
-            className={`mx-1 h-8 w-8 rounded  ${
-              disabled ? "bg-purple-900" : "bg-purple-200/10"
+            className={`mx-2 grid h-10 w-10 place-items-center rounded text-2xl font-bold  ${
+              disabled ? "bg-purple-900" : "bg-purple-200/10 hover:bg-white/20"
             }`}
             onClick={() =>
               void performActionAndRefresh(
@@ -78,11 +79,11 @@ export const ProjectView = ({
             }
             disabled={disabled}
           >
-            ➕
+            <PlusIcon />
           </button>
           <button
-            className={`mx-1 h-8 w-8 rounded  ${
-              disabled ? "bg-purple-900" : "bg-purple-200/10"
+            className={`mx-2 grid h-10 w-10 place-items-center rounded text-2xl font-bold  ${
+              disabled ? "bg-purple-900" : "bg-purple-200/10 hover:bg-white/20"
             }`}
             onClick={() =>
               void performActionAndRefresh(
@@ -93,7 +94,7 @@ export const ProjectView = ({
             }
             disabled={disabled}
           >
-            ➖
+            <MinusIcon />
           </button>
         </div>
       </div>
