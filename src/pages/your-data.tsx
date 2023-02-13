@@ -38,6 +38,7 @@ function MyDataOverview({
     }
   }
 
+  const disabled = deleteUserDataMutation.isLoading;
   return (
     <div>
       <h1 className="text-white">Dine data</h1>
@@ -47,8 +48,10 @@ function MyDataOverview({
         <div className="text-white">Projekter: {projects.data?.length}</div>
       </div>
       <button
-        className="rounded-full bg-white/10 px-10 py-3 font-semibold no-underline transition hover:bg-red-500/20"
-        disabled={deleteUserDataMutation.isLoading}
+        className={`rounded-full bg-white/20 px-10 py-3 font-semibold no-underline transition ${
+          disabled ? "" : "hover:bg-red-500/30"
+        }`}
+        disabled={disabled}
         onClick={() => void deleteUserData()}
       >
         {deleteUserDataMutation.isLoading ? "Sletter konto..." : "Slet konto"}

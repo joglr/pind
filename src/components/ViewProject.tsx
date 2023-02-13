@@ -1,24 +1,14 @@
 import type { Project } from "@prisma/client";
+import { useCallback } from "react";
+import { useRefetch } from "../pages/[projectId]";
 import { api } from "../utils/api";
 import { PlusIcon, MinusIcon } from "./util";
 
-export const ProjectView = ({
-  project,
-  refetch: refresh,
-}: {
-  project: Project;
-  refetch: () => void;
-}) => {
+export const ProjectView = ({ project }: { project: Project }) => {
   const incrementPindMutation = api.project.increasePindCount.useMutation();
   const decrementPindMutation = api.project.decreasePindCount.useMutation();
   const incrementOmgangMutation = api.project.increaseOmgangCount.useMutation();
   const decrementOmgangMutation = api.project.decreaseOmgangCount.useMutation();
-
-  async function performActionAndRefresh(action: Promise<unknown>) {
-    await action;
-    refresh();
-  }
-
   const disabled =
     incrementPindMutation.isLoading ||
     decrementPindMutation.isLoading ||
@@ -34,71 +24,83 @@ export const ProjectView = ({
         <div className="grid grid-flow-col grid-cols-2 grid-rows-2 items-center gap-2">
           <div>{project.pindCount}</div>
           <span>Pinde</span>
-          <button
-            className={`mx-2 grid h-10 w-10 place-items-center rounded text-2xl font-bold  ${
-              disabled ? "bg-purple-900" : "bg-purple-200/10 hover:bg-white/20"
-            }`}
-            onClick={() =>
-              void performActionAndRefresh(
-                incrementPindMutation.mutateAsync({ id: project.id })
-              )
-            }
-            disabled={disabled}
-          >
-            <PlusIcon />
-          </button>
-          <button
-            className={`mx-2 grid h-10 w-10 place-items-center rounded text-2xl font-bold ${
-              disabled ? "bg-purple-900" : "bg-purple-200/10 hover:bg-white/20"
-            }`}
-            onClick={() =>
-              void performActionAndRefresh(
-                decrementPindMutation.mutateAsync({
-                  projectId: project.id,
-                })
-              )
-            }
-            disabled={disabled}
-          >
-            <MinusIcon />
-          </button>
+          <CounterButton
+            value={project.pindCount}
+            target="Pind"
+            projectId={project.id}
+            type="increase"
+          />
+          <CounterButton
+            value={project.pindCount}
+            target="Pind"
+            projectId={project.id}
+            type="decrease"
+          />
         </div>
         <div className="grid grid-flow-col grid-cols-2 grid-rows-2 items-center gap-2">
           <div>{project.omgangCount}</div>
           <span>Omgange</span>
-          <button
-            className={`mx-2 grid h-10 w-10 place-items-center rounded text-2xl font-bold  ${
-              disabled ? "bg-purple-900" : "bg-purple-200/10 hover:bg-white/20"
-            }`}
-            onClick={() =>
-              void performActionAndRefresh(
-                incrementOmgangMutation.mutateAsync({
-                  projectId: project.id,
-                })
-              )
-            }
-            disabled={disabled}
-          >
-            <PlusIcon />
-          </button>
-          <button
-            className={`mx-2 grid h-10 w-10 place-items-center rounded text-2xl font-bold  ${
-              disabled ? "bg-purple-900" : "bg-purple-200/10 hover:bg-white/20"
-            }`}
-            onClick={() =>
-              void performActionAndRefresh(
-                decrementOmgangMutation.mutateAsync({
-                  projectId: project.id,
-                })
-              )
-            }
-            disabled={disabled}
-          >
-            <MinusIcon />
-          </button>
+
+          <CounterButton
+            value={project.omgangCount}
+            target="Omgang"
+            projectId={project.id}
+            type="increase"
+          />
+          <CounterButton
+            value={project.omgangCount}
+            target="Omgang"
+            projectId={project.id}
+            type="decrease"
+          />
         </div>
       </div>
       <p className="text-lg">{project.description}</p>
     </div>
   );
 };
+
+function CounterButton({
+  value,
+  type,
+  target,
+  projectId,
+}: {
+  value: number;
+  type: "increase" | "decrease";
+  target: "Pind" | "Omgang";
+  projectId: string;
+}) {
+  const mutation = api.project[`${type}${target}Count`].useMutation();
+  const refetch = useRefetch();
+  const disabled =
+    mutation.status === "loading" || (type === "decrease" && value < 1);
+
+  const performActionAndRefresh = useCallback(
+    async function performActionAndRefresh(promise: Promise<unknown>) {
+      await promise;
+      refetch();
+    },
+    [refetch]
+  );
+
+  return (
+    <button
+      className={`mx-2 grid h-10 w-10 place-items-center rounded text-2xl font-bold  ${
+        disabled
+          ? "cursor-default bg-purple-200/5"
+          : "bg-purple-200/20 hover:bg-white/30"
+      }`}
+      onClick={() =>
+        void performActionAndRefresh(
+          mutation.mutateAsync({
+            projectId,
+          })
+        )
+      }
+      disabled={disabled}
+    >
+      {type === "increase" ? <PlusIcon /> : <MinusIcon />}
+    </button>
+  );
+}

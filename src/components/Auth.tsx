@@ -10,14 +10,14 @@ export const Auth = () => {
       {router.route !== "/" ? (
         <Link
           href="/"
-          className="rounded-full bg-white/10 px-10 py-3 font-semibold no-underline transition hover:bg-white/20"
+          className="rounded-full bg-white/20 px-10 py-3 font-semibold no-underline transition hover:bg-white/30"
         >
           Tilbage
         </Link>
       ) : null}
       <button
-        className={`rounded-full bg-white/10 px-10 py-3 font-semibold no-underline transition ${
-          session.data ? "hover:bg-red-500/20" : "hover:bg-green-500/20"
+        className={`rounded-full bg-white/20 px-10 py-3 font-semibold no-underline transition ${
+          session.data ? "hover:bg-red-500/30" : "hover:bg-green-500/30"
         }`}
         onClick={session.data ? () => void signOut() : () => void signIn()}
       >

@@ -38,7 +38,7 @@ const ViewProjects = ({
       <ul>
         <li>
           <form
-            className="flex max-w-xs flex-col gap-4 rounded-xl bg-white/10 p-4"
+            className="flex max-w-xs flex-col gap-4 rounded-xl bg-white/20 p-4"
             onSubmit={(evt) => {
               evt.preventDefault();
               void createProject(evt);
@@ -58,7 +58,7 @@ const ViewProjects = ({
             />
             <button
               disabled={createProjectMutation.isLoading}
-              className="rounded-full bg-white/10 px-10 py-3 font-semibold no-underline transition hover:bg-green-500/20"
+              className="rounded-full bg-white/20 px-10 py-3 font-semibold no-underline transition hover:bg-green-500/30"
             >
               {createProjectMutation.isLoading
                 ? "Tilføj projekt..."

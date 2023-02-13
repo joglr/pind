@@ -98,13 +98,13 @@ export const projectRouter = createTRPCRouter({
   increasePindCount: protectedProcedure
     .input(
       z.object({
-        id: z.string(),
+        projectId: z.string(),
       })
     )
     .mutation(({ ctx, input }) => {
       return ctx.prisma.project.update({
         where: {
-          id: input.id,
+          id: input.projectId,
         },
         data: {
           pindCount: {
