@@ -1,6 +1,5 @@
 import type { Project } from "@prisma/client";
 import { useSession } from "next-auth/react";
-import Link from "next/link";
 import { api } from "../utils/api";
 import ProjectsList from "./ProjectsList";
 

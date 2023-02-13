@@ -1,6 +1,5 @@
-import { Session } from "next-auth";
-import { SessionContextValue, signOut, useSession } from "next-auth/react";
-import { useRouter } from "next/router";
+import type { Session } from "next-auth";
+import { signOut, useSession } from "next-auth/react";
 import { api } from "../utils/api";
 
 function MyDataPage() {
