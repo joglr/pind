@@ -119,7 +119,11 @@ export const projectRouter = createTRPCRouter({
         projectId: z.string(),
       })
     )
-    .mutation(({ ctx, input }) => {
+    .mutation(async ({ ctx, input }) => {
+      const currentValue = await ctx.prisma.project.findFirst({
+        where: { id: input.projectId },
+      });
+      if (currentValue?.pindCount === 0) return;
       return ctx.prisma.project.update({
         where: {
           id: input.projectId,
@@ -157,7 +161,11 @@ export const projectRouter = createTRPCRouter({
         projectId: z.string(),
       })
     )
-    .mutation(({ ctx, input }) => {
+    .mutation(async ({ ctx, input }) => {
+      const currentValue = await ctx.prisma.project.findFirst({
+        where: { id: input.projectId },
+      });
+      if (currentValue?.omgangCount === 0) return;
       return ctx.prisma.project.update({
         where: {
           id: input.projectId,
