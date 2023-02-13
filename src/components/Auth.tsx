@@ -16,7 +16,9 @@ export const Auth = () => {
         </Link>
       ) : null}
       <button
-        className="rounded-full bg-white/10 px-10 py-3 font-semibold no-underline transition hover:bg-green-500/20"
+        className={`rounded-full bg-white/10 px-10 py-3 font-semibold no-underline transition ${
+          session.data ? "hover:bg-red-500/20" : "hover:bg-green-500/20"
+        }`}
         onClick={session.data ? () => void signOut() : () => void signIn()}
       >
         {session.data ? "Log ud" : "Log ind"}
