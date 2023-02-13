@@ -123,7 +123,7 @@ export const projectRouter = createTRPCRouter({
       const currentValue = await ctx.prisma.project.findFirst({
         where: { id: input.projectId },
       });
-      if (currentValue?.pindCount === 0) return;
+      if (currentValue?.pindCount === 0) return currentValue
       return ctx.prisma.project.update({
         where: {
           id: input.projectId,
