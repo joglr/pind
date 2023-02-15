@@ -10,7 +10,7 @@ export function Navigation() {
       className="flex rounded-full bg-white/20 px-4 py-2 font-semibold no-underline transition hover:bg-white/30"
     >
       <BackIcon className="mr-2" />
-      <span>Tilbage</span>
+      Tilbage
     </Link>
   ) : null;
 }

@@ -31,8 +31,8 @@ const ViewProjects = ({
   const isLoading = createProjectMutation.isLoading;
   return (
     <div>
-      <h2 className="my-4 mx-1 text-4xl">Dine projekter</h2>
-      <ul className="grid grid-cols-1 place-items-stretch gap-4 sm:grid-cols-2">
+      <h2 className="my-4 mx-1 text-4xl">Opret projekt</h2>
+      <ul className="mb-16 grid grid-cols-1 place-items-stretch gap-4 sm:grid-cols-2">
         <li>
           <form
             className="flex h-full flex-col gap-4 rounded-xl bg-white/20 p-4"
@@ -69,10 +69,13 @@ const ViewProjects = ({
             </button>
           </form>
         </li>
+      </ul>
+      <h2 className="my-4 mx-1 text-4xl">Dine projekter</h2>
+      <ul className="mb-16 grid grid-cols-1 place-items-stretch gap-4 sm:grid-cols-2">
         <ProjectsList projects={projects} />
       </ul>
       <h2 className="my-4 mx-1 text-4xl">Arkiverede projekter</h2>
-      <ul className="grid grid-cols-1 place-items-stretch gap-4 sm:grid-cols-2">
+      <ul className="mb-16 grid grid-cols-1 place-items-stretch gap-4 sm:grid-cols-2">
         <ProjectsList projects={archivedProjects} />
       </ul>
     </div>

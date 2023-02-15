@@ -1,12 +1,14 @@
 import type { Project } from "@prisma/client";
 import { useRouter } from "next/router";
 import { useMemo } from "react";
+import { S } from "../i18n";
 import { api } from "../utils/api";
 import { PlusIcon, MinusIcon, ArchiveIcon, RestoreIcon } from "./icons";
 
 export const ProjectView = ({ project }: { project: Project }) => {
   const router = useRouter();
   const ctx = api.useContext();
+
   const restoreProjectMutation = api.project.restoreProject.useMutation({
     onSuccess: async () => {
       await ctx.project.invalidate();
@@ -14,14 +16,26 @@ export const ProjectView = ({ project }: { project: Project }) => {
   });
   const archiveProjectMutation = api.project.archiveProject.useMutation({
     onSuccess: async () => {
-      await router.push("/");
-      // await ctx.project.invalidate();
+      await ctx.project.invalidate();
     },
   });
 
+  const permanentlyDeleteProjectMutation =
+    api.project.permanentlyDeleteProject.useMutation({
+      onSuccess: async () => {
+        await router.push("/");
+      },
+    });
+
   function archiveProject() {
-    if (!confirm("Er du sikker på du vil arkivere dette projekt?")) return;
     void archiveProjectMutation.mutateAsync({
+      id: project.id,
+    });
+  }
+
+  function permanentlyDeleteProject() {
+    if (!confirm(S("confirmDelete"))) return;
+    void permanentlyDeleteProjectMutation.mutateAsync({
       id: project.id,
     });
   }
@@ -34,17 +48,17 @@ export const ProjectView = ({ project }: { project: Project }) => {
 
   const isArchiving = archiveProjectMutation.isLoading;
   const isRestoring = restoreProjectMutation.isLoading;
-  const disabled = isArchiving || isRestoring;
+  const isDeleting = permanentlyDeleteProjectMutation.isLoading;
+  const disabled = isArchiving || isRestoring || isDeleting;
 
   return (
     <div className="flex max-w-xs flex-col gap-4 rounded-xl bg-white/10 p-4">
-      <h3 className="text-2xl font-bold">
+      <h3
+        className={`text-2xl font-bold ${
+          project.archived ? "text-white/40" : ""
+        }`}
+      >
         {project.name}{" "}
-        {project.archived ? (
-          <span className="text-white/40">(arkiveret)</span>
-        ) : (
-          ""
-        )}
       </h3>
       <div className="grid grid-cols-2 gap-2">
         <Counter
@@ -61,25 +75,41 @@ export const ProjectView = ({ project }: { project: Project }) => {
         />
       </div>
       <p className="text-lg">{project.description}</p>
-      {project.archived ? (
-        <button
-          className="flex items-center gap-2 rounded bg-purple-200/20 p-2 hover:bg-red-500/30"
-          onClick={restoreProject}
-          disabled={disabled}
-        >
-          <RestoreIcon className="mr-2" />
-          {isRestoring ? "Gendanner projekt..." : "Gendan projekt"}
-        </button>
-      ) : (
-        <button
-          className="flex items-center gap-2 rounded bg-purple-200/20 p-2 hover:bg-red-500/30"
-          onClick={archiveProject}
-          disabled={disabled}
-        >
-          <ArchiveIcon className="mr-2" />
-          {isArchiving ? "Arkiverer projekt..." : "Arkiver projekt"}
-        </button>
-      )}
+      <div className="grid gap-4">
+        {project.archived ? (
+          <>
+            <button
+              className={`flex items-center gap-2 rounded bg-purple-200/20 p-2 ${
+                project.archived
+                  ? "hover:bg-green-500/30"
+                  : " hover:bg-red-500/30"
+              }`}
+              onClick={restoreProject}
+              disabled={disabled}
+            >
+              <RestoreIcon className="mr-2" />
+              {isRestoring ? "Gendanner projekt..." : "Gendan projekt"}
+            </button>
+            <button
+              className="flex items-center gap-2 rounded bg-purple-200/20 p-2 hover:bg-red-500/30"
+              onClick={permanentlyDeleteProject}
+              disabled={disabled}
+            >
+              <ArchiveIcon className="mr-2" />
+              Slet permanent
+            </button>
+          </>
+        ) : (
+          <button
+            className="flex grow items-center justify-center gap-2 rounded bg-purple-200/20 p-2 hover:bg-red-500/30"
+            onClick={archiveProject}
+            disabled={disabled}
+          >
+            <ArchiveIcon className="mr-2" />
+            {isArchiving ? "Arkiverer projekt..." : "Arkiver projekt"}
+          </button>
+        )}
+      </div>
     </div>
   );
 };
