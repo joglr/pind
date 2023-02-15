@@ -71,8 +71,8 @@ const ViewProjects = ({
         </li>
         <ProjectsList projects={projects} />
       </ul>
-      <h2>Arkiverede projekter</h2>
-      <ul>
+      <h2 className="my-4 mx-1 text-4xl">Arkiverede projekter</h2>
+      <ul className="grid grid-cols-1 place-items-stretch gap-4 sm:grid-cols-2">
         <ProjectsList projects={archivedProjects} />
       </ul>
     </div>
