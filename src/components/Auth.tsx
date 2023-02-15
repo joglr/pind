@@ -1,10 +1,13 @@
 import { signIn, signOut, useSession } from "next-auth/react";
 import Link from "next/link";
 import { useRouter } from "next/router";
+import { useInstallPromptState } from "../utils/hooks";
 
 export const Auth = () => {
   const session = useSession();
   const router = useRouter();
+  const { installPromptVisible, setInstallPromptVisible, install } =
+    useInstallPromptState();
   return (
     <div className="grid grid-flow-col gap-2">
       {router.route !== "/" ? (
@@ -23,6 +26,17 @@ export const Auth = () => {
       >
         {session.data ? "Log ud" : "Log ind"}
       </button>
+      {installPromptVisible ? (
+        <button
+          className="rounded-full bg-white/20 px-10 py-3 font-semibold no-underline transition hover:bg-green-500/30"
+          onClick={() => {
+            void install();
+            setInstallPromptVisible(false);
+          }}
+        >
+          Installer som app
+        </button>
+      ) : null}
     </div>
   );
 };
