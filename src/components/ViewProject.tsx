@@ -23,6 +23,7 @@ export const ProjectView = ({ project }: { project: Project }) => {
   const permanentlyDeleteProjectMutation =
     api.project.permanentlyDeleteProject.useMutation({
       onSuccess: async () => {
+        await ctx.project.invalidate();
         await router.push("/");
       },
     });
