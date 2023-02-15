@@ -1,7 +1,7 @@
 import type { Project } from "@prisma/client";
 import { useMemo } from "react";
 import { api } from "../utils/api";
-import { PlusIcon, MinusIcon } from "./util";
+import { PlusIcon, MinusIcon, ArchiveIcon } from "./icons";
 
 export const ProjectView = ({ project }: { project: Project }) => {
   return (
@@ -14,6 +14,10 @@ export const ProjectView = ({ project }: { project: Project }) => {
         <Counter project={project} target="Omgang" label="Omgange" />
       </div>
       <p className="text-lg">{project.description}</p>
+      <button>
+        <ArchiveIcon />
+        Slet projekt
+      </button>
     </div>
   );
 };
