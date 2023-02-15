@@ -3,7 +3,7 @@ import Link from "next/link";
 const PrivacyPolicy = () => {
   return (
     <div className="max-w-sm">
-      <h1 className="my-2 text-lg font-bold">Privatlivspolitik</h1>
+      <h1 className="my-4 text-4xl">Privatlivspolitik</h1>
       <p className="my-2">
         Pind indsamler automatisk ikke nogle informationer om dig.
       </p>
@@ -19,6 +19,8 @@ const PrivacyPolicy = () => {
       </p>
       <p>
         Du kan altid slette din konto, og dermed slette alle dine data fra Pind.
+      </p>
+      <p className="my-2">
         Klik{" "}
         <Link className="text-purple-400" href="/your-data">
           her

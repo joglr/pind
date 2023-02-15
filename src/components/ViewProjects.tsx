@@ -1,6 +1,7 @@
 import type { Project } from "@prisma/client";
 import { useSession } from "next-auth/react";
 import { api } from "../utils/api";
+import { AddIcon } from "./icons";
 import ProjectsList from "./ProjectsList";
 
 const ViewProjects = ({
@@ -27,7 +28,7 @@ const ViewProjects = ({
 
   return (
     <div>
-      <h2 className="my-4 mx-1 text-4xl">Mine projekter</h2>
+      <h2 className="my-4 mx-1 text-4xl">Dine projekter</h2>
       {projects.length > 0 ? (
         <ProjectsList projects={projects} />
       ) : (
@@ -57,11 +58,14 @@ const ViewProjects = ({
             />
             <button
               disabled={createProjectMutation.isLoading}
-              className="rounded-full bg-white/20 px-10 py-3 font-semibold no-underline transition hover:bg-green-500/30"
+              className="flex flex-row justify-center rounded-full bg-white/20 px-4 py-2 font-semibold no-underline transition hover:bg-green-500/30"
             >
-              {createProjectMutation.isLoading
-                ? "Tilføj projekt..."
-                : "Tilføj projekt"}
+              <AddIcon className="mr-2" />
+              <span>
+                {createProjectMutation.isLoading
+                  ? "Tilføj projekt..."
+                  : "Tilføj projekt"}
+              </span>
             </button>
           </form>
         </li>

@@ -7,7 +7,7 @@ function MyDataPage() {
 
   return (
     <div>
-      <h1 className="text-white">Dine data</h1>
+      <h1 className="my-4 mx-1 text-4xl">Dine data</h1>
       {session.status === "authenticated" ? (
         <MyDataOverview session={session} />
       ) : (
@@ -40,21 +40,22 @@ function MyDataOverview({
   const disabled = deleteUserDataMutation.isLoading;
   return (
     <div>
-      <h1 className="text-white">Dine data</h1>
       <div className="m-1">
         <div className="text-white">Navn: {data.user.name}</div>
         <div className="text-white">Email: {data.user.email}</div>
         <div className="text-white">Projekter: {projects.data?.length}</div>
       </div>
-      <button
-        className={`rounded-full bg-white/20 px-10 py-3 font-semibold no-underline transition ${
-          disabled ? "" : "hover:bg-red-500/30"
-        }`}
-        disabled={disabled}
-        onClick={() => void deleteUserData()}
-      >
-        {deleteUserDataMutation.isLoading ? "Sletter konto..." : "Slet konto"}
-      </button>
+      <div className="mt-2 grid place-items-center">
+        <button
+          className={`rounded-full bg-white/20 px-4 py-2 font-semibold no-underline transition ${
+            disabled ? "" : "hover:bg-red-500/30"
+          }`}
+          disabled={disabled}
+          onClick={() => void deleteUserData()}
+        >
+          {deleteUserDataMutation.isLoading ? "Sletter konto..." : "Slet konto"}
+        </button>
+      </div>
     </div>
   );
 }
