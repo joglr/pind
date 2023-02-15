@@ -1,23 +1,85 @@
 import type { Project } from "@prisma/client";
+import { useRouter } from "next/router";
 import { useMemo } from "react";
 import { api } from "../utils/api";
-import { PlusIcon, MinusIcon, ArchiveIcon } from "./icons";
+import { PlusIcon, MinusIcon, ArchiveIcon, RestoreIcon } from "./icons";
 
 export const ProjectView = ({ project }: { project: Project }) => {
+  const router = useRouter();
+  const ctx = api.useContext();
+  const restoreProjectMutation = api.project.restoreProject.useMutation({
+    onSuccess: async () => {
+      await ctx.project.invalidate();
+    },
+  });
+  const archiveProjectMutation = api.project.archiveProject.useMutation({
+    onSuccess: async () => {
+      await router.push("/");
+      // await ctx.project.invalidate();
+    },
+  });
+
+  function archiveProject() {
+    if (!confirm("Er du sikker på du vil arkivere dette projekt?")) return;
+    void archiveProjectMutation.mutateAsync({
+      id: project.id,
+    });
+  }
+
+  function restoreProject() {
+    void restoreProjectMutation.mutateAsync({
+      id: project.id,
+    });
+  }
+
+  const isArchiving = archiveProjectMutation.isLoading;
+  const isRestoring = restoreProjectMutation.isLoading;
+  const disabled = isArchiving || isRestoring;
+
   return (
     <div className="flex max-w-xs flex-col gap-4 rounded-xl bg-white/10 p-4">
-      {/* <h2 className="my-4 mx-1 text-4xl">Projekter</h2> */}
-
-      <h3 className="text-2xl font-bold">{project.name}</h3>
+      <h3 className="text-2xl font-bold">
+        {project.name}{" "}
+        {project.archived ? (
+          <span className="text-white/40">(arkiveret)</span>
+        ) : (
+          ""
+        )}
+      </h3>
       <div className="grid grid-cols-2 gap-2">
-        <Counter project={project} target="Pind" label="Pinde" />
-        <Counter project={project} target="Omgang" label="Omgange" />
+        <Counter
+          project={project}
+          target="Pind"
+          label="Pinde"
+          disabled={project.archived}
+        />
+        <Counter
+          project={project}
+          target="Omgang"
+          label="Omgange"
+          disabled={project.archived}
+        />
       </div>
       <p className="text-lg">{project.description}</p>
-      <button>
-        <ArchiveIcon />
-        Slet projekt
-      </button>
+      {project.archived ? (
+        <button
+          className="flex items-center gap-2 rounded bg-purple-200/20 p-2 hover:bg-red-500/30"
+          onClick={restoreProject}
+          disabled={disabled}
+        >
+          <RestoreIcon className="mr-2" />
+          {isRestoring ? "Gendanner projekt..." : "Gendan projekt"}
+        </button>
+      ) : (
+        <button
+          className="flex items-center gap-2 rounded bg-purple-200/20 p-2 hover:bg-red-500/30"
+          onClick={archiveProject}
+          disabled={disabled}
+        >
+          <ArchiveIcon className="mr-2" />
+          {isArchiving ? "Arkiverer projekt..." : "Arkiver projekt"}
+        </button>
+      )}
     </div>
   );
 };
@@ -26,10 +88,12 @@ function Counter({
   project,
   target,
   label,
+  disabled,
 }: {
   project: Project;
   target: "Pind" | "Omgang";
   label: string;
+  disabled: boolean;
 }) {
   const targetKey = useMemo(
     () => `${target.toLowerCase() as "pind" | "omgang"}Count` as const,
@@ -45,12 +109,14 @@ function Counter({
         target={target}
         projectId={project.id}
         type="increase"
+        disabled={disabled}
       />
       <CounterButton
         value={project[targetKey]}
         target={target}
         projectId={project.id}
         type="decrease"
+        disabled={disabled}
       />
     </div>
   );
@@ -61,11 +127,13 @@ function CounterButton({
   type,
   target,
   projectId,
+  disabled,
 }: {
   value: number;
   type: "increase" | "decrease";
   target: "Pind" | "Omgang";
   projectId: string;
+  disabled: boolean;
 }) {
   const ctx = api.useContext();
   const mutation = api.project[`${type}${target}Count`].useMutation({
@@ -74,12 +142,12 @@ function CounterButton({
     },
   });
 
-  const disabled = type === "decrease" && value < 1;
+  const isDisabled = (type === "decrease" && value < 1) || disabled;
 
   return (
     <button
       className={`mx-2 grid h-10 w-10 place-items-center rounded text-2xl font-bold  ${
-        disabled
+        isDisabled
           ? "cursor-default bg-purple-200/5"
           : "bg-purple-200/20 hover:bg-white/30"
       }`}
@@ -88,7 +156,7 @@ function CounterButton({
           projectId,
         })
       }
-      disabled={disabled}
+      disabled={isDisabled}
     >
       {type === "increase" ? <PlusIcon /> : <MinusIcon />}
     </button>
