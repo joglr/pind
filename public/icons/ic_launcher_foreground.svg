@@ -1,0 +1,90 @@
+<svg width="440" height="440" viewBox="0 0 440 440" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="ic_launcher_foreground">
+<g id="long shadow" filter="url(#filter0_f_55_20)">
+<path d="M432 290.579L286.711 145.289L145.289 286.711L290.579 432H432V290.579Z" fill="url(#paint0_linear_55_20)"/>
+</g>
+<g id="plate" filter="url(#filter1_dii_55_20)">
+<circle cx="216" cy="216" r="104" fill="#FAFAFA"/>
+</g>
+<rect id="finish" width="432" height="432" fill="url(#paint1_radial_55_20)"/>
+<g id="Yarn and Sticks">
+<g id="Sticks">
+<path id="Line 1" d="M128.259 248L303.259 183.5" stroke="#05211C" stroke-width="6"/>
+<path id="Line 2" d="M174.759 303L255.759 129.5" stroke="#05211C" stroke-width="6"/>
+<circle id="Ellipse 1" cx="296.759" cy="186" r="5" fill="#C39BFD" stroke="#05211C" stroke-width="6"/>
+<circle id="Ellipse 2" cx="252.759" cy="136" r="5" fill="#C39BFD" stroke="#05211C" stroke-width="6"/>
+</g>
+<path id="Yarn ball" d="M285.759 216C285.759 254.108 254.866 285 216.759 285C178.651 285 147.759 254.108 147.759 216C147.759 177.892 178.651 147 216.759 147C254.866 147 285.759 177.892 285.759 216Z" fill="#C39BFD" stroke="#05211C" stroke-width="6"/>
+<g id="Yarn ball pattern">
+<mask id="mask0_55_20" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="144" y="144" width="145" height="144">
+<path id="Yarn ball_2" d="M288.759 216C288.759 255.765 256.523 288 216.759 288C176.994 288 144.759 255.765 144.759 216C144.759 196.073 152.854 178.036 165.936 165C178.958 152.022 196.921 144 216.759 144C256.523 144 288.759 176.235 288.759 216Z" fill="#FAFAFA"/>
+</mask>
+<g mask="url(#mask0_55_20)">
+<line id="Line 21" x1="269.88" y1="167.121" x2="167.88" y2="269.121" stroke="#05211C" stroke-width="6"/>
+<line id="Line 22" x1="117.88" y1="113.879" x2="219.88" y2="215.879" stroke="#05211C" stroke-width="6"/>
+<line id="Line 3" x1="269.88" y1="167.121" x2="167.88" y2="269.121" stroke="#05211C" stroke-width="6"/>
+<line id="Line 4" x1="279.88" y1="177.121" x2="177.88" y2="279.121" stroke="#05211C" stroke-width="6"/>
+<line id="Line 5" x1="289.88" y1="187.121" x2="187.88" y2="289.121" stroke="#05211C" stroke-width="6"/>
+<line id="Line 6" x1="299.88" y1="197.121" x2="197.88" y2="299.121" stroke="#05211C" stroke-width="6"/>
+<line id="Line 7" x1="309.88" y1="207.121" x2="207.88" y2="309.121" stroke="#05211C" stroke-width="6"/>
+<line id="Line 8" x1="279.88" y1="177.121" x2="177.88" y2="279.121" stroke="#05211C" stroke-width="6"/>
+<line id="Line 9" x1="117.88" y1="113.879" x2="219.88" y2="215.879" stroke="#05211C" stroke-width="6"/>
+<line id="Line 10" x1="127.88" y1="103.879" x2="229.88" y2="205.879" stroke="#05211C" stroke-width="6"/>
+<line id="Line 11" x1="137.88" y1="93.8787" x2="239.88" y2="195.879" stroke="#05211C" stroke-width="6"/>
+<line id="Line 12" x1="147.88" y1="83.8787" x2="249.88" y2="185.879" stroke="#05211C" stroke-width="6"/>
+<line id="Line 13" x1="157.88" y1="73.8787" x2="259.88" y2="175.879" stroke="#05211C" stroke-width="6"/>
+<line id="Line 14" x1="127.88" y1="103.879" x2="229.88" y2="205.879" stroke="#05211C" stroke-width="6"/>
+</g>
+<mask id="mask1_55_20" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="144" y="165" width="76" height="104">
+<path id="Yarn ball_3" d="M165.936 165C152.854 178.036 144.759 196.073 144.759 216C144.759 236.837 153.61 255.607 167.759 268.755C186.013 250.5 219.259 217 219.259 217L165.936 165Z" fill="#D9D9D9"/>
+</mask>
+<g mask="url(#mask1_55_20)">
+<g id="Group 1">
+<line id="Line 15" x1="72.7588" y1="244.569" x2="217.009" y2="244.569" stroke="#05211C" stroke-width="6"/>
+<line id="Line 16" x1="72.7588" y1="230.426" x2="217.009" y2="230.426" stroke="#05211C" stroke-width="6"/>
+<line id="Line 17" x1="72.7588" y1="216.284" x2="217.009" y2="216.284" stroke="#05211C" stroke-width="6"/>
+<line id="Line 18" x1="72.7588" y1="202.142" x2="217.009" y2="202.142" stroke="#05211C" stroke-width="6"/>
+<line id="Line 19" x1="72.7588" y1="188" x2="217.009" y2="188" stroke="#05211C" stroke-width="6"/>
+<line id="Line 20" x1="72.7588" y1="230.426" x2="217.009" y2="230.426" stroke="#05211C" stroke-width="6"/>
+</g>
+</g>
+</g>
+</g>
+</g>
+<defs>
+<filter id="filter0_f_55_20" x="137.289" y="137.289" width="302.711" height="302.711" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+<feFlood flood-opacity="0" result="BackgroundImageFix"/>
+<feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape"/>
+<feGaussianBlur stdDeviation="4" result="effect1_foregroundBlur_55_20"/>
+</filter>
+<filter id="filter1_dii_55_20" x="96" y="112" width="240" height="240" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+<feFlood flood-opacity="0" result="BackgroundImageFix"/>
+<feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
+<feOffset dy="16"/>
+<feGaussianBlur stdDeviation="8"/>
+<feColorMatrix type="matrix" values="0 0 0 0 0.243137 0 0 0 0 0.152941 0 0 0 0 0.137255 0 0 0 0.2 0"/>
+<feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_55_20"/>
+<feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_55_20" result="shape"/>
+<feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
+<feOffset dy="-2"/>
+<feComposite in2="hardAlpha" operator="arithmetic" k2="-1" k3="1"/>
+<feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.2 0"/>
+<feBlend mode="normal" in2="shape" result="effect2_innerShadow_55_20"/>
+<feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
+<feOffset dy="2"/>
+<feComposite in2="hardAlpha" operator="arithmetic" k2="-1" k3="1"/>
+<feColorMatrix type="matrix" values="0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 0.2 0"/>
+<feBlend mode="normal" in2="effect2_innerShadow_55_20" result="effect3_innerShadow_55_20"/>
+</filter>
+<linearGradient id="paint0_linear_55_20" x1="214.929" y1="214.929" x2="318" y2="318" gradientUnits="userSpaceOnUse">
+<stop offset="0.348066" stop-color="#3E2723" stop-opacity="0.15"/>
+<stop offset="0.685083" stop-color="#3E2723" stop-opacity="0.02"/>
+<stop offset="1" stop-color="#3E2723" stop-opacity="0"/>
+</linearGradient>
+<radialGradient id="paint1_radial_55_20" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(114 114) rotate(45) scale(288.5)">
+<stop stop-color="white" stop-opacity="0.1"/>
+<stop offset="0.316473" stop-color="white" stop-opacity="0.05"/>
+<stop offset="1" stop-color="white" stop-opacity="0"/>
+</radialGradient>
+</defs>
+</svg>
