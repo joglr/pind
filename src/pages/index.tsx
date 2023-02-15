@@ -7,12 +7,9 @@ import ViewProjects from "../components/ViewProjects";
 
 const Home: NextPage = () => {
   const session = useSession();
-  const { data: projects, refetch } = api.project.getAllProjects.useQuery(
-    undefined,
-    {
-      enabled: session.status === "authenticated",
-    }
-  );
+  const { data } = api.project.getProjects.useQuery(undefined, {
+    enabled: session.status === "authenticated",
+  });
 
   return (
     <>
@@ -21,8 +18,13 @@ const Home: NextPage = () => {
         <meta name="description" content="Strikkehjælper" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      {session.status === "authenticated" && projects ? (
-        <ViewProjects projects={projects} refetch={() => void refetch()} />
+      {session.status === "authenticated" &&
+      data?.projects &&
+      data?.archivedProjects ? (
+        <ViewProjects
+          projects={data.projects}
+          archivedProjects={data.archivedProjects}
+        />
       ) : null}
     </>
   );
