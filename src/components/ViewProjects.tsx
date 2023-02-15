@@ -1,8 +1,8 @@
 import type { Project } from "@prisma/client";
+import Link from "next/link";
 import { useSession } from "next-auth/react";
 import { api } from "../utils/api";
 import { AddIcon } from "./icons";
-import ProjectsList from "./ProjectsList";
 
 const ViewProjects = ({
   projects,
@@ -23,22 +23,17 @@ const ViewProjects = ({
       description: evt.currentTarget.description.value!,
       ownerId: session.data.user.id,
     });
+    evt.currentTarget.reset();
     refetch();
   }
 
   return (
     <div>
       <h2 className="my-4 mx-1 text-4xl">Dine projekter</h2>
-      {projects.length > 0 ? (
-        <ProjectsList projects={projects} />
-      ) : (
-        <span className="m-1">Du har ikke tilføjet nogen projekter endnu</span>
-      )}
-      <h2 className="my-4 mx-1 text-4xl">Tiføj projekt</h2>
-      <ul>
+      <ul className="grid grid-cols-1 place-items-stretch gap-4 sm:grid-cols-2">
         <li>
           <form
-            className="flex max-w-xs flex-col gap-4 rounded-xl bg-white/20 p-4"
+            className="flex h-full flex-col gap-4 rounded-xl bg-white/20 p-4"
             onSubmit={(evt) => {
               evt.preventDefault();
               void createProject(evt);
@@ -50,12 +45,14 @@ const ViewProjects = ({
               placeholder="Navn på projekt"
               disabled={createProjectMutation.isLoading}
             />
-            <input
-              className="border-b border-dashed  bg-transparent text-lg"
-              name="description"
-              placeholder="Beskrivelse"
-              disabled={createProjectMutation.isLoading}
-            />
+            <div className="grow">
+              <input
+                className="border-b border-dashed  bg-transparent text-lg"
+                name="description"
+                placeholder="Beskrivelse"
+                disabled={createProjectMutation.isLoading}
+              />
+            </div>
             <button
               disabled={createProjectMutation.isLoading}
               className="flex flex-row justify-center rounded-full bg-white/20 px-4 py-2 font-semibold no-underline transition hover:bg-green-500/30"
@@ -69,9 +66,38 @@ const ViewProjects = ({
             </button>
           </form>
         </li>
+        <ProjectsList projects={projects} />
       </ul>
     </div>
   );
 };
+
+const ProjectsList = ({ projects }: { projects: Project[] }) => (
+  <>
+    {projects.map((project) => {
+      return (
+        <li key={project.id}>
+          <Link
+            className="max-w flex h-full flex-col gap-4 rounded-xl bg-white/20 p-4 hover:bg-white/30"
+            href={`/${project.id}`}
+          >
+            <h3 className="text-2xl font-bold">{project.name} →</h3>
+            <div className="grow text-lg">{project.description}</div>
+            <div className="flex">
+              <div className="m-1">
+                <div className="text-gray-200">{project.pindCount}</div>
+                <span className="text-gray-400">Pinde</span>
+              </div>
+              <div className="m-1">
+                <div className="text-gray-200">{project.omgangCount}</div>
+                <span className="text-gray-400">Omgange</span>
+              </div>
+            </div>
+          </Link>
+        </li>
+      );
+    })}
+  </>
+);
 
 export default ViewProjects;
