@@ -6,7 +6,14 @@ type Locale = "da-DK";
 
 export function S(key: keyof Strings) {
   const locale = "da-DK";
-  return strings[locale][key];
+  const localeStrings = strings[locale];
+  if (!(key in localeStrings)) {
+    if (process.env.NODE_ENV === "development") {
+      throw new Error(`Missing translation for key: ${key}`);
+    }
+    return `{{ ${key} }}`;
+  }
+  return localeStrings[key];
 }
 
 const da_DK: Strings = {

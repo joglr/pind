@@ -44,7 +44,7 @@ const MyApp: AppType<{ session: Session | null }> = ({
         <meta name="application-name" content="Pind" />
         <meta name="msapplication-TileColor" content="#603cba" />
       </Head>
-      <body className="flex min-h-screen flex-col place-items-center bg-gradient-to-b from-[#2e026d] to-[#15162c] text-white">
+      <body className="flex min-h-screen flex-col place-items-center bg-gradient-to-b from-[#2e026d] to-[#15162c] p-2 text-white">
         <header className="container flex flex-col items-center justify-center gap-12 px-4 py-16">
           <h1 className="text-5xl font-extrabold tracking-tight sm:text-[5rem]">
             <Link href="/" className="text-[hsl(280,100%,70%)]">
@@ -56,7 +56,7 @@ const MyApp: AppType<{ session: Session | null }> = ({
         <main className="flex grow flex-col place-items-center">
           <Component {...pageProps} />
         </main>
-        <footer className="mt-6 mb-4 grid columns-1 grid-flow-row place-items-center gap-2">
+        <footer className="my-2 grid columns-1 grid-flow-row place-items-center gap-2">
           <FooterActions />
           <Link className="text-white" href="/privacy">
             Privatlispolitik
