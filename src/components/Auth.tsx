@@ -34,7 +34,7 @@ export const Auth = () => {
             setInstallPromptVisible(false);
           }}
         >
-          Installer som app
+          Installer app
         </button>
       ) : null}
     </div>
