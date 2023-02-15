@@ -72,11 +72,23 @@ const ViewProjects = ({
       </ul>
       <h2 className="my-4 mx-1 text-4xl">Dine projekter</h2>
       <ul className="mb-16 grid grid-cols-1 place-items-stretch gap-4 sm:grid-cols-2">
-        <ProjectsList projects={projects} />
+        {projects.length > 0 ? (
+          <ProjectsList projects={projects} />
+        ) : (
+          <span className="mx-2 italic">
+            Du har ikke tilføjet nogle projekter
+          </span>
+        )}
       </ul>
       <h2 className="my-4 mx-1 text-4xl">Arkiverede projekter</h2>
       <ul className="mb-16 grid grid-cols-1 place-items-stretch gap-4 sm:grid-cols-2">
-        <ProjectsList projects={archivedProjects} />
+        {archivedProjects.length > 0 ? (
+          <ProjectsList projects={archivedProjects} />
+        ) : (
+          <span className="mx-2 italic">
+            Du har ikke nogle arkiverede projekter
+          </span>
+        )}
       </ul>
     </div>
   );
