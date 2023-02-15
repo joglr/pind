@@ -56,9 +56,9 @@ const MyApp: AppType<{ session: Session | null }> = ({
         <main className="flex grow flex-col place-items-center">
           <Component {...pageProps} />
         </main>
-        <footer className="flex flex-col place-items-center">
+        <footer className="mt-6 mb-4 grid columns-1 grid-flow-row place-items-center gap-2">
           <FooterActions />
-          <Link className="my-2 text-white" href="/privacy">
+          <Link className="text-white" href="/privacy">
             Privatlispolitik
           </Link>
         </footer>
