@@ -1,3 +1,4 @@
+import pkg from "./../../package.json";
 import { type AppType } from "next/app";
 import { type Session } from "next-auth";
 import { SessionProvider } from "next-auth/react";
@@ -61,6 +62,10 @@ const MyApp: AppType<{ session: Session | null }> = ({
           <Link className="text-white" href="/privacy">
             Privatlispolitik
           </Link>
+          <span className="text-white/40">
+            Version {pkg.version} &middot;{" "}
+            {process.env["VERCEL_GIT_COMMIT_SHA"]}
+          </span>
         </footer>
       </body>
     </SessionProvider>
