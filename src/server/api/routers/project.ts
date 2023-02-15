@@ -23,6 +23,32 @@ export const projectRouter = createTRPCRouter({
       });
     }),
 
+  archiveProject: protectedProcedure
+    .input(z.object({ id: z.string() }))
+    .mutation(({ ctx, input }) => {
+      return ctx.prisma.project.update({
+        where: {
+          id: input.id,
+        },
+        data: {
+          archived: true,
+        },
+      });
+    }),
+
+  restoreProject: protectedProcedure
+    .input(z.object({ id: z.string() }))
+    .mutation(({ ctx, input }) => {
+      return ctx.prisma.project.update({
+        where: {
+          id: input.id,
+        },
+        data: {
+          archived: false,
+        },
+      });
+    }),
+
   deleteProject: protectedProcedure
     .input(z.object({ id: z.string() }))
     .mutation(({ ctx, input }) => {
@@ -52,6 +78,7 @@ export const projectRouter = createTRPCRouter({
     return ctx.prisma.project.findMany({
       where: {
         ownerId: ctx.session.user.id,
+        archived: false,
       },
       orderBy: {
         updatedAt: "desc",
