@@ -9,26 +9,10 @@ export const Auth = () => {
   const { installPromptVisible, setInstallPromptVisible, install } =
     useInstallPromptState();
   return (
-    <div className="grid grid-flow-col gap-2">
-      {router.route !== "/" ? (
-        <Link
-          href="/"
-          className="rounded-full bg-white/20 px-10 py-3 font-semibold no-underline transition hover:bg-white/30"
-        >
-          Tilbage
-        </Link>
-      ) : null}
-      <button
-        className={`rounded-full bg-white/20 px-10 py-3 font-semibold no-underline transition ${
-          session.data ? "hover:bg-red-500/30" : "hover:bg-green-500/30"
-        }`}
-        onClick={session.data ? () => void signOut() : () => void signIn()}
-      >
-        {session.data ? "Log ud" : "Log ind"}
-      </button>
+    <div className="grid-row-2 grid place-items-center gap-x-2 gap-y-4">
       {installPromptVisible ? (
         <button
-          className="rounded-full bg-white/20 px-10 py-3 font-semibold no-underline transition hover:bg-green-500/30"
+          className="col-span-2 rounded-full bg-white/20 px-8 py-2 font-semibold no-underline transition hover:bg-green-500/30"
           onClick={() => {
             void install();
             setInstallPromptVisible(false);
@@ -37,6 +21,22 @@ export const Auth = () => {
           Installer app
         </button>
       ) : null}
+      {router.route !== "/" ? (
+        <Link
+          href="/"
+          className="rounded-full bg-white/20 px-8 py-2 font-semibold no-underline transition hover:bg-white/30"
+        >
+          Tilbage
+        </Link>
+      ) : null}
+      <button
+        className={`rounded-full bg-white/20 px-8 py-2 font-semibold no-underline transition ${
+          session.data ? "hover:bg-red-500/30" : "hover:bg-green-500/30"
+        } ${router.route === "/" ? "col-span-2" : ""}`}
+        onClick={session.data ? () => void signOut() : () => void signIn()}
+      >
+        {session.data ? "Log ud" : "Log ind"}
+      </button>
     </div>
   );
 };
