@@ -1,3 +1,4 @@
+import type { Project } from "@prisma/client";
 import { z } from "zod";
 
 import { createTRPCRouter, publicProcedure, protectedProcedure } from "../trpc";
@@ -71,6 +72,30 @@ export const projectRouter = createTRPCRouter({
         },
       });
     }),
+
+  getProjects: protectedProcedure.query(async ({ ctx }) => {
+    if (!ctx.session?.user) {
+      return {
+        projects: null,
+        archivedProjects: null,
+      };
+    }
+    const [projects, archivedProjects] = (await Promise.all([
+      ctx.prisma.project.findMany({
+        where: { ownerId: ctx.session.user.id, archived: false },
+        orderBy: { updatedAt: "desc" },
+      }),
+      ctx.prisma.project.findMany({
+        where: { ownerId: ctx.session.user.id, archived: true },
+        orderBy: { updatedAt: "desc" },
+      }),
+    ])) as [Project[], Project[]];
+    return {
+      projects,
+      archivedProjects,
+    };
+  }),
+
   getAllProjects: publicProcedure.query(({ ctx }) => {
     if (!ctx.session?.user) {
       return [];
@@ -79,6 +104,21 @@ export const projectRouter = createTRPCRouter({
       where: {
         ownerId: ctx.session.user.id,
         archived: false,
+      },
+      orderBy: {
+        updatedAt: "desc",
+      },
+    });
+  }),
+
+  getArchivedProjects: publicProcedure.query(({ ctx }) => {
+    if (!ctx.session?.user) {
+      return [];
+    }
+    return ctx.prisma.project.findMany({
+      where: {
+        ownerId: ctx.session.user.id,
+        archived: true,
       },
       orderBy: {
         updatedAt: "desc",

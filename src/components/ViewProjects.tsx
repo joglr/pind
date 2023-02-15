@@ -6,11 +6,12 @@ import { AddIcon } from "./icons";
 
 const ViewProjects = ({
   projects,
-  refetch,
+  archivedProjects,
 }: {
   projects: Project[];
-  refetch: () => void;
+  archivedProjects: Project[];
 }) => {
+  const ctx = api.useContext();
   const session = useSession();
   const createProjectMutation = api.project.createProject.useMutation();
 
@@ -23,10 +24,11 @@ const ViewProjects = ({
       description: evt.currentTarget.description.value!,
       ownerId: session.data.user.id,
     });
+    await ctx.project.invalidate();
     evt.currentTarget.reset();
-    refetch();
   }
 
+  const isLoading = createProjectMutation.isLoading;
   return (
     <div>
       <h2 className="my-4 mx-1 text-4xl">Dine projekter</h2>
@@ -36,6 +38,7 @@ const ViewProjects = ({
             className="flex h-full flex-col gap-4 rounded-xl bg-white/20 p-4"
             onSubmit={(evt) => {
               evt.preventDefault();
+              if (isLoading) return;
               void createProject(evt);
             }}
           >
@@ -43,7 +46,7 @@ const ViewProjects = ({
               className="border-b border-dashed  bg-transparent text-2xl font-bold"
               name="projectName"
               placeholder="Navn på projekt"
-              disabled={createProjectMutation.isLoading}
+              disabled={isLoading}
             />
             <div className="grow">
               <input
@@ -67,6 +70,10 @@ const ViewProjects = ({
           </form>
         </li>
         <ProjectsList projects={projects} />
+      </ul>
+      <h2>Arkiverede projekter</h2>
+      <ul>
+        <ProjectsList projects={archivedProjects} />
       </ul>
     </div>
   );
