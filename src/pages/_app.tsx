@@ -67,7 +67,11 @@ const MyApp: AppType<{ session: Session | null }> = ({
           </Link>
           <span className="text-white/40">
             Version {pkg.version} &middot;{" "}
-            {process.env["VERCEL_GIT_COMMIT_SHA"]}
+            {process.env.NODE_ENV === "production" ? (
+              process.env["NEXT_PUBLIC_VERCEL_GIT_COMMIT_SHA"]
+            ) : (
+              <span>dev</span>
+            )}
           </span>
         </footer>
       </body>
