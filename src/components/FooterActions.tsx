@@ -1,4 +1,5 @@
 import { signIn, signOut, useSession } from "next-auth/react";
+import Link from "next/link";
 import { useInstallPromptState } from "../utils/hooks";
 import { InstallIcon, SignInIcon, SignOutIcon } from "./icons";
 
@@ -20,7 +21,15 @@ export const FooterActions = () => {
           <span>Installer app</span>
         </button>
       ) : null}
-
+      {!session.data ? (
+        <Link
+          className="flex rounded-full bg-white/20 px-4 py-2 font-semibold no-underline transition hover:bg-green-500/30"
+          href="/sign-up"
+        >
+          <SignInIcon className="mr-2" />
+          <span>Opret bruger</span>
+        </Link>
+      ) : null}
       <button
         className={`flex rounded-full bg-white/20 px-4 py-2 font-semibold no-underline transition ${
           session.data ? "hover:bg-red-500/30" : "hover:bg-green-500/30"

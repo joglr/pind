@@ -25,8 +25,8 @@ export const serverSchema = z.object({
   GOOGLE_CLIENT_SECRET: z.string(),
   FACEBOOK_CLIENT_ID: z.string(),
   FACEBOOK_CLIENT_SECRET: z.string(),
-  // APPLE_CLIENT_ID: z.string(),
-  // APPLE_CLIENT_SECRET: z.string(),
+  APPLE_CLIENT_ID: z.string(),
+  APPLE_CLIENT_SECRET: z.string(),
 });
 
 /**
@@ -45,8 +45,8 @@ export const serverEnv = {
   GOOGLE_CLIENT_SECRET: process.env.GOOGLE_CLIENT_SECRET,
   FACEBOOK_CLIENT_ID: process.env.FACEBOOK_CLIENT_ID,
   FACEBOOK_CLIENT_SECRET: process.env.FACEBOOK_CLIENT_SECRET,
-  // APPLE_CLIENT_ID: process.env.GOOGLE_CLIENT_ID,
-  // APPLE_CLIENT_SECRET: process.env.GOOGLE_CLIENT_SECRET,
+  APPLE_CLIENT_ID: process.env.GOOGLE_CLIENT_ID,
+  APPLE_CLIENT_SECRET: process.env.GOOGLE_CLIENT_SECRET,
 };
 
 /**
